@@ -2,15 +2,17 @@ const express = require("express");
 const mdb = require("mongoose");
 const Signup = require("./models/SignupSchema");
 const bcrypt = require("bcrypt");
-const cors = require("cors")
+const cors = require("cors");
+const dotenv = require("dotenv");
 const app = express();
 const PORT = 8001;
 
 app.use(express.json());
 app.use(cors())
+dotenv.config()
 
 mdb
-  .connect("mongodb+srv://cys:cys@cypersec.h6wsgqg.mongodb.net/seceDec2025")
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("MongoDB Connection Successful"))
   .catch((err) => console.log("MongoDB Connection Unsuccessful", err));
 
